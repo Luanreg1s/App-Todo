@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
+import { deletarTodoList, putAtualizarTarefa } from '../../api/todoList';
 
 
 const bull = (
@@ -20,7 +21,30 @@ const bull = (
 
 
 export default function CardTarefa(props) {
-   const {todo}= props
+
+   const {todo,setAtualizaTarefa,todoListId}= props
+
+
+   function atualizarTarefa(id,feito){
+    const body = {
+      feito: !feito
+    }
+
+    const resposta = putAtualizarTarefa(id,body);
+    resposta.then((dados) => {
+      setAtualizaTarefa(true);
+    })
+
+   
+   }
+
+   function deleteTodolist(id){
+     console.log("oiiii")
+      const resposta = deletarTodoList(id);
+      resposta.then((dados) => {
+        setAtualizaTarefa(true);
+      })
+   } 
   
     return (
 
@@ -37,7 +61,7 @@ export default function CardTarefa(props) {
                {todo.tarefas.map((tarefa)=> (
 
                 <Typography key={tarefa.id}variant="body2">
-                  <Checkbox {...tarefa.descricao}  checked={tarefa.feito} />
+                <Checkbox  checked={tarefa.feito} onClick={(e) => (atualizarTarefa(tarefa.id, tarefa.feito))} />
                   {tarefa.descricao}
                 </Typography>
                ))}
@@ -45,8 +69,7 @@ export default function CardTarefa(props) {
             </Box>}
         </CardContent>
         <CardActions>
-            <Button size="small">Editar</Button>
-            <Button size="small">Remover</Button>
+            <Button size="small" onClick={(e) => (deleteTodolist(todoListId)) }>Remover</Button>
         </CardActions>
 
       </Card>

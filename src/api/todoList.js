@@ -9,3 +9,16 @@ export async function getTodolists(){
 
    return response
 }
+
+export async function putAtualizarTarefa(id,body){
+    const response = await axiosClient.put(`/atualizar-tarefa/${id}`,body);
+
+    return response 
+}
+
+
+export async function deletarTodoList(id){
+        const response = await axiosClient.delete(`/deletar-todolist/${id}`);
+    
+        return response 
+}
