@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
 import { deletarTodoList, putAtualizarTarefa } from '../../api/todoList';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 const bull = (
@@ -63,6 +64,10 @@ export default function CardTarefa(props) {
                 <Typography key={tarefa.id}variant="body2">
                 <Checkbox  checked={tarefa.feito} onClick={(e) => (atualizarTarefa(tarefa.id, tarefa.feito))} />
                   {tarefa.descricao}
+                  <Button>
+                  <DeleteForeverIcon onClick={(e) => (atualizarTarefa(tarefa.id, tarefa.feito))}/>
+                  </Button>
+                  
                 </Typography>
                ))}
                 
