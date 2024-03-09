@@ -23,7 +23,9 @@ const bull = (
 
 export default function CardTarefa(props) {
 
-   const {todo,setAtualizaTarefa,todoListId}= props
+   const {todo,setAtualizaTarefa,todoListId,handleOpenModalTarefa}= props
+
+   
 
 
    function atualizarTarefa(id,feito){
@@ -39,6 +41,7 @@ export default function CardTarefa(props) {
    
    }
 
+
    function deleteTodolist(id){
      console.log("oiiii")
       const resposta = deletarTodoList(id);
@@ -46,6 +49,9 @@ export default function CardTarefa(props) {
         setAtualizaTarefa(true);
       })
    } 
+
+   
+ 
   
     return (
 
@@ -74,7 +80,9 @@ export default function CardTarefa(props) {
             </Box>}
         </CardContent>
         <CardActions>
+           <Button size="small" onClick={handleOpenModalTarefa}>Criar Tarefa</Button>
             <Button size="small" onClick={(e) => (deleteTodolist(todoListId)) }>Remover</Button>
+
         </CardActions>
 
       </Card>

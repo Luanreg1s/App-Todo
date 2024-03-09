@@ -1,4 +1,4 @@
-import { getTodolists} from './api/todoList'
+import { criarTodolists, getTodolists} from './api/todoList'
 import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -8,6 +8,11 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardTarefa from './componentes/CardTarefa';
 
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import ModalForm from './componentes/ModalForm';
+import ModalTarefa from './componentes/ModalTarefa';
+
 
 function App() {
 
@@ -16,6 +21,20 @@ function App() {
   const [carregando, setCarregando] = useState(false)
   const [atualizaTarefa, setAtualizaTarefa] = useState(false)
   const [deletarTodolist, setDeletarTodolist] = useState(false)
+  const [open, setOpen] = useState()
+  const [openModalTarefa, setOpenModalTarefa] = useState()
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleOpenModalTarefa = () => setOpenModalTarefa(true);
+  const handleCloseModalTarefa = () => setOpenModalTarefa(false);
+
+
+  function abrirModal() {
+    setOpen(true)
+
+  }
 
   useEffect(() => {
     setCarregando(true)
@@ -37,10 +56,15 @@ function App() {
       {todolists && <div> 
         {
           todolists.map((todo) => (
-            <CardTarefa key={todo.id} todo={todo} setAtualizaTarefa={setAtualizaTarefa} todoListId={todo.id}/>
+            <CardTarefa key={todo.id} todo={todo} setAtualizaTarefa={setAtualizaTarefa} todoListId={todo.id} handleOpenModalTarefa={handleOpenModalTarefa}/>
           ))
         }
       </div> }
+      <Fab color="secondary" aria-label="add" onClick={handleOpen} >
+        <AddIcon  />
+      </Fab>
+      <ModalForm open={open} handleOpen={handleOpen} handleClose={handleClose} setAtualizaTarefa={setAtualizaTarefa}/>
+      <ModalTarefa  openModalTarefa={openModalTarefa} handleOpenModalTarefa={handleOpenModalTarefa} handleCloseModalTarefa={handleCloseModalTarefa} setAtualizaTarefa={setAtualizaTarefa}/>
 
     </div>
   )

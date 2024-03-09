@@ -22,3 +22,21 @@ export async function deletarTodoList(id){
     
         return response 
 }
+
+export async function deletarTarefa(id){
+    const response = await axiosClient.delete(`/deletar-tarefa/${id}`);
+
+    return response 
+}
+
+export async function criarTodolists(body){
+    const response = await axiosClient.post('/criar-todolist', body);
+ 
+    return response
+ }
+
+ export async function criarTarefa(body){
+    const response = await axiosClient.post('/criar-tarefa', body);
+ 
+    return response
+ }
