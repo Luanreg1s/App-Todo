@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-    baseURL: "http://localhost:3000"
+    baseURL: "https://api-to-do-list-3.onrender.com"
 });
 
 export async function getTodolists(){
