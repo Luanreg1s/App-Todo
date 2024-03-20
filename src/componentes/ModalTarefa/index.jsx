@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { criarTodolists } from '../../api/todoList';
+import { criarTarefa, criarTodolists } from '../../api/todoList';
 
 
 const style = {
@@ -20,19 +20,19 @@ const style = {
 };
 
 export default function ModalTarefa(props) {
-  const {openModalTarefa, handleOpenModalTarefa, handleCloseModalTarefa, setAtualizaTarefa}=props
-  const [titulo, setTitulo]= React.useState()
+  const {openModalTarefa, handleOpenModalTarefa, handleCloseModalTarefa, tarefaSelecionada, setAtualizaTarefa}=props
+  const [descricao, setDescricao]= React.useState()
 
-  function novaTodolists(){
+  function novaTarefa(){
     const body = {
-      titulo: titulo,
-      usuarioUsuarioId: "00871b3e-cbfe-446a-aaa1-096558ddd70d"
+      descricao: descricao,
+      todoListId: Number(tarefaSelecionada)
     }
 
-    const resposta = criarTodolists(body);
+    const resposta = criarTarefa(body);
     resposta.then((dados) => {
       setAtualizaTarefa(true);
-      handleClose()
+      handleCloseModalTarefa()
     })
 
    
@@ -49,11 +49,11 @@ export default function ModalTarefa(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Criar Tarefa
+            Criar Tarefa #{tarefaSelecionada}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <OutlinedInput placeholder="Criar Tarefa" onChange={(e) => {setTitulo(e.target.value)}} />
-          <Button variant="contained" size="small" onClick={novaTodolists} sx={{marginLeft:"2px"}}>
+          <OutlinedInput placeholder="Criar Tarefa" onChange={(e) => {setDescricao(e.target.value)}} />
+          <Button variant="contained" size="small" onClick={novaTarefa} sx={{marginLeft:"2px"}}>
           Criar
         </Button>
           </Typography>

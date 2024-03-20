@@ -23,6 +23,7 @@ function App() {
   const [deletarTodolist, setDeletarTodolist] = useState(false)
   const [open, setOpen] = useState()
   const [openModalTarefa, setOpenModalTarefa] = useState()
+  const [tarefaSelecionada, setTarefaSelecionada] = useState()
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -56,15 +57,30 @@ function App() {
       {todolists && <div> 
         {
           todolists.map((todo) => (
-            <CardTarefa key={todo.id} todo={todo} setAtualizaTarefa={setAtualizaTarefa} todoListId={todo.id} handleOpenModalTarefa={handleOpenModalTarefa}/>
+            <CardTarefa 
+            key={todo.id}
+            todo={todo}
+            setTarefaSelecionada={setTarefaSelecionada}
+            setAtualizaTarefa={setAtualizaTarefa}
+            todoListId={todo.id}
+            handleOpenModalTarefa={handleOpenModalTarefa}/>
           ))
         }
       </div> }
       <Fab color="secondary" aria-label="add" onClick={handleOpen} >
         <AddIcon  />
       </Fab>
-      <ModalForm open={open} handleOpen={handleOpen} handleClose={handleClose} setAtualizaTarefa={setAtualizaTarefa}/>
-      <ModalTarefa  openModalTarefa={openModalTarefa} handleOpenModalTarefa={handleOpenModalTarefa} handleCloseModalTarefa={handleCloseModalTarefa} setAtualizaTarefa={setAtualizaTarefa}/>
+      <ModalForm 
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        setAtualizaTarefa={setAtualizaTarefa}/>
+      <ModalTarefa 
+        tarefaSelecionada={tarefaSelecionada}
+        openModalTarefa={openModalTarefa}
+        handleOpenModalTarefa={handleOpenModalTarefa}
+        handleCloseModalTarefa={handleCloseModalTarefa}
+        setAtualizaTarefa={setAtualizaTarefa}/>
 
     </div>
   )

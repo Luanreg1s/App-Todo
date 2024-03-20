@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Checkbox from '@mui/material/Checkbox';
-import { deletarTodoList, putAtualizarTarefa } from '../../api/todoList';
+import { criarTarefa, deletarTodoList, putAtualizarTarefa } from '../../api/todoList';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
@@ -23,7 +23,7 @@ const bull = (
 
 export default function CardTarefa(props) {
 
-   const {todo,setAtualizaTarefa,todoListId,handleOpenModalTarefa}= props
+   const {todo,setAtualizaTarefa,setTarefaSelecionada,todoListId,handleOpenModalTarefa}= props
 
    
 
@@ -50,6 +50,10 @@ export default function CardTarefa(props) {
       })
    } 
 
+   function criarTarefa(){
+    setTarefaSelecionada(todoListId)
+    handleOpenModalTarefa()
+   }
    
  
   
@@ -80,7 +84,7 @@ export default function CardTarefa(props) {
             </Box>}
         </CardContent>
         <CardActions>
-           <Button size="small" onClick={handleOpenModalTarefa}>Criar Tarefa</Button>
+           <Button size="small" onClick={criarTarefa}>Criar Tarefa</Button>
             <Button size="small" onClick={(e) => (deleteTodolist(todoListId)) }>Remover</Button>
 
         </CardActions>
