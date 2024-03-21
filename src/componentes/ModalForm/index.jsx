@@ -32,7 +32,7 @@ export default function ModalForm(props) {
     const resposta = criarTodolists(body);
     resposta.then((dados) => {
       setAtualizaTarefa(true);
-      handleClose()
+      handleClose(false)
     })
 
    
